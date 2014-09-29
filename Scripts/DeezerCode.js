@@ -1,12 +1,7 @@
 ﻿window.dzAsyncInit = function () {
     DZ.init({
         appId: '143641',
-        channelUrl: 'https://joaxazevedo.github.io/channel/channel.html',
-        player: {
-            onload: function (response) {
-                alert('onLoad: DZ.player is ready');
-            }
-        }
+        channelUrl: 'https://joaxazevedo.github.io/channel/channel.html'
     });
 };
 

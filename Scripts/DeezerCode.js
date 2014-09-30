@@ -21,20 +21,9 @@ window.dzAsyncInit = function () {
             onload: function (response) { }
         }
     });
-};
-
-(function () {
-    var e = document.createElement('script');
-    e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
-    e.async = true;
-    document.getElementById('dz-root').appendChild(e);
-}());
-
-function login() {
-    DZ.login(function (response) {
+	
+	DZ.login(function (response) {
         if (response.authResponse.accessToken) {
-            alert('Welcome!  Fetching your information.... ');
-
             DZ.api('/user/me', function (response) {
                 alert('Good to see you, ' + response.name + '.');
 				// Chamada para configurar o usuario do deezer
@@ -44,7 +33,14 @@ function login() {
             alert('User cancelled login or did not fully authorize.');
         }
     }, { perms: 'basic_access, email, manage_library' });
-}
+};
+
+(function () {
+    var e = document.createElement('script');
+    e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
+    e.async = true;
+    document.getElementById('dz-root').appendChild(e);
+}());
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // FIM Inicialização e acesso a API
@@ -55,14 +51,6 @@ function login() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function () {
-    $('#LoginButton').click(function () {
-        alert('verify if is ready!');
-
-        DZ.ready(function (sdk_options) {
-            login();
-        });
-    });
-	
 	$('#ShowPlaylists').click(function () {
 		getAllPlaylists();	
 	});

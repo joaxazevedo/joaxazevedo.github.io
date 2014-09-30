@@ -31,7 +31,6 @@ window.dzAsyncInit = function () {
 }());
 
 function login() {
-    alert('Login');
     DZ.login(function (response) {
         if (response.authResponse.accessToken) {
             alert('Welcome!  Fetching your information.... ');
@@ -42,7 +41,7 @@ function login() {
         } else {
             alert('User cancelled login or did not fully authorize.');
         }
-    }, { perms: 'basic_access,email' });
+    }, { perms: 'basic_access' });
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

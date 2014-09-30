@@ -1,9 +1,24 @@
-﻿window.dzAsyncInit = function () {
+﻿/////////////////////////////////////////////////////////////////////////////////////////
+// Variaveis de inicialização
+/////////////////////////////////////////////////////////////////////////////////////////
+
+var channelURL = 'https://joaxazevedo.github.io/channel/channel.html';
+var appID = '143641';
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// FIM Variaveis de inicialização
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// Inicialização e acesso a API
+/////////////////////////////////////////////////////////////////////////////////////////
+
+window.dzAsyncInit = function () {
     DZ.init({
-        appId: '143641',
-        channelUrl: 'https://joaxazevedo.github.io/channel/channel.html',
+        appId: appID,
+        channelUrl: channelURL,
         player: {
-            onload: function (response) {}
+            onload: function (response) { }
         }
     });
 };
@@ -14,6 +29,30 @@
     e.async = true;
     document.getElementById('dz-root').appendChild(e);
 }());
+
+function login() {
+    alert('Login');
+    DZ.login(function (response) {
+        if (response.authResponse) {
+            alert("authResponse: " + response.authResponse);
+            alert('Welcome!  Fetching your information.... ');
+
+            DZ.api('/user/me', function (response) {
+                alert('Good to see you, ' + response.name + '.');
+            });
+        } else {
+            alert('User cancelled login or did not fully authorize.');
+        }
+    }, { perms: 'basic_access,email' });
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// FIM Inicialização e acesso a API
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// Eventos
+/////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function () {
     $('#ShowPlaylists').click(function () {
@@ -26,32 +65,9 @@ $(document).ready(function () {
     });
 });
 
-function registerApp() {
-    alert('Register');
-    DZ.init({
-        appId: '143641',
-        channelUrl: 'https://joaxazevedo.github.io/channel/channel.html',
-        player: {
-            onload: function (response) {
-                alert('DZ.player is ready');
-            }
-        }
-    });
-}
-
-function login() {
-    alert('Login');
-    DZ.login(function (response) {
-        if (response.authResponse) {
-            alert('Welcome!  Fetching your information.... ');
-            DZ.api('/user/me', function (response) {
-                alert('Good to see you, ' + response.name + '.');
-            });
-        } else {
-            alert('User cancelled login or did not fully authorize.');
-        }
-    }, { perms: 'basic_access,email' });
-}
+/////////////////////////////////////////////////////////////////////////////////////////
+// FIM Eventos
+/////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // Variaveis da API

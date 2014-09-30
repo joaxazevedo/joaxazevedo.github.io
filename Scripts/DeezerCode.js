@@ -1,7 +1,7 @@
 ﻿window.dzAsyncInit = function () {
     DZ.init({
         appId: '143641',
-        channelUrl: 'https://joaxazevedo.github.io/channel/channel.html',
+        channelUrl: 'http://bit.ly/1xxdGF2',
         player: {
             onload: function (response) {}
         }
@@ -30,7 +30,7 @@ function registerApp() {
     alert('Register');
     DZ.init({
         appId: '143641',
-        channelUrl: 'https://joaxazevedo.github.io/channel/channel.html',
+        channelUrl: 'http://bit.ly/1xxdGF2',
         player: {
             onload: function (response) {
                 alert('DZ.player is ready');

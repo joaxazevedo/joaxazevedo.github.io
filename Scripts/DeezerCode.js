@@ -41,7 +41,7 @@ function login() {
         } else {
             alert('User cancelled login or did not fully authorize.');
         }
-    }, { perms: 'basic_access' });
+    }, { perms: 'basic_access', 'email', 'manage_library' });
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

@@ -53,7 +53,7 @@ function login() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function () {
-    $('#ShowPlaylists').click(function () {
+    $('#LoginButton').click(function () {
         alert('verify if is ready!');
 
         DZ.ready(function (sdk_options) {
@@ -61,6 +61,10 @@ $(document).ready(function () {
             login();
         });
     });
+	
+	$('#ShowPlaylists').click(function () {
+		getAllPlaylists();	
+	});
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -129,6 +133,13 @@ function createPlaylist(titulo) {
         function (response) {
             console.log("My new playlist ID: ", response.id);
         });
+}
+
+function getAllPlaylists() {
+	DZ.api(URLuser_me + 'playlists',
+		function (response) {
+			$('#divContent').append(response.title);
+		});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

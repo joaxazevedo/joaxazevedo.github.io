@@ -134,7 +134,7 @@ function getAllPlaylists() {
 		function (response) {
 			for(var i = 0; i < response.data.length; i++) {
 				$('#divContent').append(response.data[i].title + '<br />');
-				
+				getAllMusicsOfAPlaylist(response.data[i].id);
 			}
 		});
 }

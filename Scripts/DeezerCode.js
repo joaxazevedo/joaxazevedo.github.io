@@ -131,7 +131,7 @@ function createPlaylist(titulo) {
 function getAllPlaylists() {
 	DZ.api(URLuser_me + 'playlists',
 		function (response) {
-			for(var i = 0; i < response.data.lentgh; i++) {
+			for(var i = 0; i < response.data.length; i++) {
 				$('#divContent').append(response.data[i].title);
 			}
 		});

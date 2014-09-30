@@ -37,6 +37,8 @@ function login() {
 
             DZ.api('/user/me', function (response) {
                 alert('Good to see you, ' + response.name + '.');
+				// Chamada para configurar o usuario do deezer
+				getConnectedUser();
             });
         } else {
             alert('User cancelled login or did not fully authorize.');
@@ -57,7 +59,6 @@ $(document).ready(function () {
         alert('verify if is ready!');
 
         DZ.ready(function (sdk_options) {
-            alert('ready: DZ SDK is ready');
             login();
         });
     });
@@ -91,10 +92,14 @@ var usuario;
 /////////////////////////////////////////////////////////////////////////////////////////
 
 // Pega as informações do usuário conectado
-function getConnectedUserInfo() {
-    DZ.api(URLuser_me, function (response) {
-        usuario = response;
-    });
+function getConnectedUser() {
+	if(!usuario) {	
+		DZ.api(URLuser_me, function (response) {
+			usuario = response;
+		});
+	} 
+	
+	return usuario;
 }
 
 function getUserInfo(userID) {
@@ -136,7 +141,7 @@ function createPlaylist(titulo) {
 }
 
 function getAllPlaylists() {
-	DZ.api(URLuser_me + 'playlist',
+	DZ.api(URLuser + getConnectedUser().id + 'playlist',
 		function (response) {
 			$('#divContent').append(response.title);
 		});

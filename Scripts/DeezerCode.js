@@ -143,7 +143,7 @@ function getAllMusicsOfAPlaylist(playlistID) {
 	DZ.api('/playlist/' + playlistID + '/tracks/' ,
 		function (response) {
 			for(var i = 0; i < response.data.length; i++) {
-				$('#divContent').append('    ' + i + '. ' response.data[i].title + '<br />');
+				$('#divContent').append('    ' + i + '. ' + response.data[i].title + '<br />');
 			}
 		});
 }

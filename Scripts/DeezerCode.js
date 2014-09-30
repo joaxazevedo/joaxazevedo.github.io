@@ -79,7 +79,7 @@ $(document).ready(function () {
 // URL do usuário
 var URLuser = '/user/';
 // URL do usuário logado
-var URLuser_me = URLuser + 'me';
+var URLuser_me = URLuser + 'me/';
 // ID de usuario
 var usuario;
 
@@ -141,7 +141,7 @@ function createPlaylist(titulo) {
 }
 
 function getAllPlaylists() {
-	DZ.api(URLuser + getConnectedUser().id + 'playlist',
+	DZ.api(URLuser + getConnectedUser().id + '/playlist/',
 		function (response) {
 			$('#divContent').append(response.title);
 		});

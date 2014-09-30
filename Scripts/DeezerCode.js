@@ -118,9 +118,10 @@ function getAlbumInfo(albumId) {
 /////////////////////////////////////////////////////////////////////////////////////////
 // Funções para playlists
 /////////////////////////////////////////////////////////////////////////////////////////
+var userPlaylist = URLuser_me + 'playlists/';
 
 function createPlaylist(titulo) {
-    DZ.api(URLuser_me + 'playlists',
+    DZ.api(userPlaylist,
         'POST',
         { title: titulo },
         function (response) {
@@ -129,10 +130,20 @@ function createPlaylist(titulo) {
 }
 
 function getAllPlaylists() {
-	DZ.api(URLuser_me + 'playlists',
+	DZ.api(userPlaylist,
 		function (response) {
 			for(var i = 0; i < response.data.length; i++) {
 				$('#divContent').append(response.data[i].title + '<br />');
+				
+			}
+		});
+}
+
+function getAllMusicsOfAPlaylist(playlistID) {
+	DZ.api('/playlist/' + playlistID + '/tracks/' ,
+		function (response) {
+			for(var i = 0; i < response.data.length; i++) {
+				$('#divContent').append('    ' + i + '. ' response.data[i].title + '<br />');
 			}
 		});
 }

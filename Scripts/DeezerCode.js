@@ -33,8 +33,7 @@ window.dzAsyncInit = function () {
 function login() {
     alert('Login');
     DZ.login(function (response) {
-        if (response.authResponse) {
-            alert("authResponse: " + response.authResponse);
+        if (response.authResponse.accessToken) {
             alert('Welcome!  Fetching your information.... ');
 
             DZ.api('/user/me', function (response) {

@@ -154,8 +154,8 @@ function getTracks(playlistID, iArPlaylists) {
     DZ.api('/playlist/' + playlistID + '/tracks/',
         function (response) {
             // Paginação, o deezer manda no máximo 50 registros por vez
-            for (var iPagina = 0; iPagina < ((arPlaylists[iArPlaylists].tracks.length / 50) + 1) ; iPagina++) {
-                for (var iTrack = iPagina * 50; iTrack < ((iPagina * 50) + 50), iTrack < arPlaylists[iArPlaylists].tracks.length; iTrack++) {
+            for (var iPagina = 0; iPagina < ((response.data.length / 50) + 1) ; iPagina++) {
+                for (var iTrack = iPagina * 50; iTrack < ((iPagina * 50) + 50) && iTrack < response.data.length; iTrack++) {
                     arPlaylists[iArPlaylists].tracks.push(response.data[iTrack]);
                 }
             }

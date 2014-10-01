@@ -21,13 +21,13 @@ window.dzAsyncInit = function () {
             onload: function (response) { }
         }
     });
-	
-	DZ.login(function (response) {
+
+    DZ.login(function (response) {
         if (response.authResponse.accessToken) {
             DZ.api('/user/me', function (response) {
                 alert('Good to see you, ' + response.name + '.');
-				// Chamada para configurar o usuario do deezer
-				getConnectedUser();
+                // Chamada para configurar o usuario do deezer
+                getConnectedUser();
             });
         } else {
             alert('User cancelled login or did not fully authorize.');
@@ -51,9 +51,9 @@ window.dzAsyncInit = function () {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function () {
-	$('#ShowPlaylists').click(function () {
-		getAllPlaylists();
-	});
+    $('#ShowPlaylists').click(function () {
+        getAllPlaylists();
+    });
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -81,13 +81,13 @@ var usuario;
 
 // Pega as informações do usuário conectado
 function getConnectedUser() {
-	if(!usuario) {	
-		DZ.api(URLuser_me, function (response) {
-			usuario = response;
-		});
-	} 
-	
-	return usuario;
+    if (!usuario) {
+        DZ.api(URLuser_me, function (response) {
+            usuario = response;
+        });
+    }
+
+    return usuario;
 }
 
 function getUserInfo(userID) {
@@ -131,39 +131,85 @@ function createPlaylist(titulo) {
 }
 
 function getAllPlaylists() {
-	DZ.api(userPlaylist,
+    DZ.api(userPlaylist,
 		function (response) {
-			for(var i = 0; i < response.data.length; i++) {
-				arPlaylists.push({ data : response.data[i], tracks : [] });
-			}
-			
-			getAllMusicsOfArPlaylist();
-		});
+		    for (var i = 0; i < response.data.length; i++) {
+		        arPlaylists.push({ data: response.data[i], tracks: [] });
+		    }
+		}, getAllMusicsOfArPlaylist);
 }
 
 function getAllMusicsOfArPlaylist() {
-	for(var iArPlaylists = 0; iArPlaylists < arPlaylists.length; iArPlaylists++) {
-		DZ.api('/playlist/' + arPlaylists[iArPlaylists].data.id + '/tracks/',
+    for (var iArPlaylists = 0; iArPlaylists < arPlaylists.length; iArPlaylists++) {
+        DZ.api('/playlist/' + arPlaylists[iArPlaylists].data.id + '/tracks/',
 			function (response) {
-				// Paginação, o deezer manda no máximo 50 registros por vez
-				for(var iPagina = 0; iPagina < ((arPlaylists[iArPlaylists].tracks.length / 50) + 1); iPagina++) {
-					for(var iTrack = iPagina * 50; iTrack < ((iPagina * 50) + 50 ), iTrack < arPlaylists[iArPlaylists].tracks.length; iTrack++) {
-						arPlaylists[iArPlaylists].tracks.push(response.data[iTrack]);
-					}
-				}
+			    // Paginação, o deezer manda no máximo 50 registros por vez
+			    for (var iPagina = 0; iPagina < ((arPlaylists[iArPlaylists].tracks.length / 50) + 1) ; iPagina++) {
+			        for (var iTrack = iPagina * 50; iTrack < ((iPagina * 50) + 50), iTrack < arPlaylists[iArPlaylists].tracks.length; iTrack++) {
+			            arPlaylists[iArPlaylists].tracks.push(response.data[iTrack]);
+			        }
+			    }
 			});
-	}
+    }
 }
 
 function getAllMusicsOfAPlaylist(playlistID) {
-	DZ.api('/playlist/' + playlistID + '/tracks/' ,
+    DZ.api('/playlist/' + playlistID + '/tracks/',
 		function (response) {
-			for(var i = 0; i < response.data.length; i++) {
-				$('#divContent').append('    ' + i + '. ' + response.data[i].title + '<br />');
-			}
+		    for (var i = 0; i < response.data.length; i++) {
+		        $('#divContent').append('    ' + i + '. ' + response.data[i].title + '<br />');
+		    }
 		});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // FIM Funções para playlists
 /////////////////////////////////////////////////////////////////////////////////////////
+
+
+//function dffdf() {
+//    try {
+//        var path = null, request_method = 'get', args = null, callback = false;
+
+//        switch (arguments.length) {
+//            case 1:
+//                path = arguments[0];
+//                break;
+//            case 2:
+//                path = arguments[0];
+//                callback = arguments[1];
+//                break;
+//            case 3:
+//                path = arguments[0];
+
+//                if (typeof (arguments[1]) == 'string') {
+//                    request_method = arguments[1];
+//                }
+//                else {
+//                    args = arguments[1];
+//                }
+//                callback = arguments[2];
+//                break;
+//            case 4:
+//                path = arguments[0];
+//                request_method = arguments[1];
+//                args = arguments[2];
+//                callback = arguments[3];
+//                break;
+//            default:
+//                break;
+//        }
+
+//        callback = callback || function () { };
+
+//        if (path === null || path === "") {
+//            callback({ error: 'no path defined' });
+//            return false;
+//        }
+
+//        DZ.SIMPLE_API.apiCall(path, request_method, args, callback);
+//    }
+//    catch (e) {
+//        DZ.catchException(e);
+//    }
+//}

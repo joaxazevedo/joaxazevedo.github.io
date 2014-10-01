@@ -137,7 +137,7 @@ function getAllPlaylists() {
 				arPlaylists.push({ data : response.data[i], tracks : [] });
 			}
 			
-			getAllMusicsOfArPlaylist(arPlaylist);
+			getAllMusicsOfArPlaylist();
 		});
 }
 

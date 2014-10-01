@@ -52,7 +52,7 @@ window.dzAsyncInit = function () {
 
 $(document).ready(function () {
 	$('#ShowPlaylists').click(function () {
-		getAllMusicsOfArPlaylist();
+		getAllPlaylists();
 	});
 });
 

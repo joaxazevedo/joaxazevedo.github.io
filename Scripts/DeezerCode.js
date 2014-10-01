@@ -38,7 +38,7 @@ window.dzAsyncInit = function () {
 (function () {
     var e = document.createElement('script');
     e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
-    e.async = true;
+    e.async = false;
     document.getElementById('dz-root').appendChild(e);
 }());
 

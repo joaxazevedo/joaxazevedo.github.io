@@ -132,11 +132,14 @@ function createPlaylist(titulo) {
 
 function getAllPlaylists() {
     DZ.api(userPlaylist,
+        'POST',
 		function (response) {
 		    for (var i = 0; i < response.data.length; i++) {
 		        arPlaylists.push({ data: response.data[i], tracks: [] });
 		    }
-		}, getAllMusicsOfArPlaylist);
+
+		    getAllMusicsOfArPlaylist();
+		});
 }
 
 function getAllMusicsOfArPlaylist() {

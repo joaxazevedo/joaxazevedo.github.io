@@ -119,6 +119,7 @@ function getAlbumInfo(albumId) {
 // Funções para playlists
 /////////////////////////////////////////////////////////////////////////////////////////
 var userPlaylist = URLuser_me + 'playlists/';
+var arPlaylists = [];
 
 function createPlaylist(titulo) {
     DZ.api(userPlaylist,
@@ -130,21 +131,31 @@ function createPlaylist(titulo) {
 }
 
 function getAllPlaylists() {
-	var arPlaylist = [];
 	DZ.api(userPlaylist,
 		function (response) {
 			for(var i = 0; i < response.data.length; i++) {
-				arPlaylist.push({ data : response.data[i], tracks : [] });
+				arPlaylists.push({ data : response.data[i], tracks : [] });
 			}
 			
 			getAllMusicsOfArPlaylist(arPlaylist);
 		});
-		
-	return arPlaylist;
 }
 
-function getAllMusicsOfArPlaylist(arPlaylist) {
-	arPlaylist.forEach(function (elem, index, array) {
+function getAllMusicsOfArPlaylist() {
+	for(var iArPlaylists = 0; iArPlaylists < arPlaylists.length; iArPlaylists++) {
+		DZ.api('/playlist/' + arPlaylists.data[iArPlaylists].id + '/tracks/',
+			function (response) {
+				// Paginação, o deezer manda no máximo 50 registros por vez
+				for(var iPagina = 0; iPagina < ((arPlaylists.data[iArPlaylists].tracks.length / 50) + 1); iPagina++) {
+					for(var iTrack = iPagina * 50; iTrack < ((iPagina * 50) + 50 ), iTrack < arPlaylists.data[iArPlaylists].tracks.length; iTrack++) {
+						arPlaylists[iArPlaylists].tracks.push(response.data[iTrack]);
+					}
+				}
+			});
+	}
+}
+
+	arPlaylists.forEach(function (elem, index, array) {
 		DZ.api('/playlist/' + elem.id + '/tracks/',
 			function (response) {
 				for(var i = 0; i < response.data.length; i++) {

@@ -38,7 +38,7 @@ window.dzAsyncInit = function () {
 (function () {
     var e = document.createElement('script');
     e.src = 'https://cdns-files.deezer.com/js/min/dz.js';
-    e.async = false;
+    e.async = true;
     document.getElementById('dz-root').appendChild(e);
 }());
 
@@ -136,23 +136,22 @@ function getAllPlaylists() {
 			for(var i = 0; i < response.data.length; i++) {
 				arPlaylist.push({ data : response.data[i], tracks : [] });
 			}
+			
+			getAllMusicsOfArPlaylist(arPlaylist);
 		});
 		
 	return arPlaylist;
 }
 
-function getAllMusicsOfArPlaylist() {
-	var arPlaylist = getAllPlaylists();
+function getAllMusicsOfArPlaylist(arPlaylist) {
 	arPlaylist.forEach(function (elem, index, array) {
-		DZ.api('/playlist/' + elem.id + '/tracks/' ,
+		DZ.api('/playlist/' + elem.id + '/tracks/',
 			function (response) {
 				for(var i = 0; i < response.data.length; i++) {
 					array[index].tracks.push(response.data[i]);
 				}
 			});
 	});
-	
-	return arPlaylist;
 }
 
 function getAllMusicsOfAPlaylist(playlistID) {

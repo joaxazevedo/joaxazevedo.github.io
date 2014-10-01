@@ -155,16 +155,6 @@ function getAllMusicsOfArPlaylist() {
 	}
 }
 
-	arPlaylists.forEach(function (elem, index, array) {
-		DZ.api('/playlist/' + elem.id + '/tracks/',
-			function (response) {
-				for(var i = 0; i < response.data.length; i++) {
-					array[index].tracks.push(response.data[i]);
-				}
-			});
-	});
-}
-
 function getAllMusicsOfAPlaylist(playlistID) {
 	DZ.api('/playlist/' + playlistID + '/tracks/' ,
 		function (response) {

@@ -32,7 +32,7 @@ window.dzAsyncInit = function () {
         } else {
             alert('User cancelled login or did not fully authorize.');
         }
-    }, { perms: 'basic_access, email, manage_library' });
+    }, { perms: 'basic_access, manage_library' });
 };
 
 (function () {
@@ -52,7 +52,7 @@ window.dzAsyncInit = function () {
 
 $(document).ready(function () {
 	$('#ShowPlaylists').click(function () {
-		getAllPlaylists();	
+		getAllMusicsOfArPlaylist();
 	});
 });
 
@@ -130,13 +130,29 @@ function createPlaylist(titulo) {
 }
 
 function getAllPlaylists() {
+	var arPlaylist = [];
 	DZ.api(userPlaylist,
 		function (response) {
 			for(var i = 0; i < response.data.length; i++) {
-				$('#divContent').append(response.data[i].title + '<br />');
-				getAllMusicsOfAPlaylist(response.data[i].id);
+				arPlaylist.push({ data = response.data, tracks = [] });
 			}
 		});
+		
+	return arPlaylist;
+}
+
+function getAllMusicsOfArPlaylist() {
+	var arPlaylist = getAllPlaylists();
+	arPlaylist.forEach(function (elem, index, array) {
+		DZ.api('/playlist/' + elem.id + '/tracks/' ,
+			function (response) {
+				for(var i = 0; i < response.data.length; i++) {
+					array[index].tracks.push(response.data[i]);
+				}
+			});
+	});
+	
+	return arPlaylist;
 }
 
 function getAllMusicsOfAPlaylist(playlistID) {

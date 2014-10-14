@@ -134,6 +134,7 @@ function createPlaylist(titulo) {
 function getAllPlaylists() {
     DZ.api(userPlaylist,
 		function (response) {
+			alert('Num playlists: ' + response.data.length);
 		    for (var i = 0; i < response.data.length; i++) {
 		        arPlaylists.push({ data: response.data[i], tracks: [] });
 		    }

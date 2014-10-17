@@ -26,7 +26,7 @@ window.dzAsyncInit = function () {
         if (response.authResponse.accessToken) {
             DZ.api('/user/me', function (response) {
                 alert('Good to see you, ' + response.name + '.');
-                // Chamada para configurar o usuario do deezer
+                // Chamada para configurar o usuario do deezer 
                 getConnectedUser();
             });
         } else {

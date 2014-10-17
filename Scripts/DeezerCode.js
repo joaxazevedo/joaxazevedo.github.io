@@ -163,7 +163,9 @@ function getAllMusicsOfArPlaylist() {
 function getTracks(playlistID, iArPlaylists) {
     DZ.api('/playlist/' + playlistID + '/tracks/',
         function (response) {
-            arPlaylists[iArPlaylists].tracks.push(response.data);
+			for(var i = 0; i < response.data.length; i++) {
+				arPlaylists[iArPlaylists].tracks.push(response.data[i]);
+			}
         });
 }
 

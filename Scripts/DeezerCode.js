@@ -141,6 +141,17 @@ function getAllPlaylists() {
 
 		    getAllMusicsOfArPlaylist();
 		});
+		
+	printAllPlaylistAndTracks();
+}
+
+function  printAllPlaylistAndTracks() {
+	for(var i = 0; i < arPlaylists.length; i++) {
+		$('#divContent').append(arPlaylists[i].data.title + '<br />');
+		for(var j = 0; arPlaylists[i].tracks.length; j++) {
+			$('#divContent').append('    ' + arPlaylists[i].tracks[j].title + '<br />')
+		}
+	}
 }
 
 function getAllMusicsOfArPlaylist() {

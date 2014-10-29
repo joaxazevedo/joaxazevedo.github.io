@@ -52,8 +52,7 @@ window.dzAsyncInit = function () {
 
 $(document).ready(function () {
     $('#ShowPlaylists').click(function () {
-        getAllPlaylists();
-        alert('END Button');
+        printAllPlaylists();
     });
 });
 

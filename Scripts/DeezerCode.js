@@ -138,11 +138,15 @@ function getAllPlaylists() {
 		    for (var i = 0; i < response.data.length; i++) {
 		        arPlaylists.push({ data: response.data[i], tracks: [] });
 		    }
-
-		    getAllMusicsOfArPlaylist();
 		});
-		
-	printAllPlaylistAndTracks();
+}
+
+function printAllPlaylists() {
+    getAllPlaylists();
+
+    for(var i = 0; i < arPlaylists.length; i++) {
+        $('#divContent').append(arPlaylists[i].data.title + '<br />');
+    }
 }
 
 function  printAllPlaylistAndTracks() {

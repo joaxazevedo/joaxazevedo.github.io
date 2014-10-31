@@ -135,9 +135,9 @@ function getAllPlaylists() {
     DZ.api(userPlaylist,
 		function (response) {
 			iArPlaylists = JSON.parse(response.data);
-		    //for (var i = 0; i < response.data.length; i++) {
-		    //    arPlaylists.push({ data: response.data[i], tracks: [] });
-		    //}
+		    for(var i = 0; i < iArPlaylists.length; i++) {
+				$('#divContent').append(i + '. ' + iArPlaylists[i].title + '<br />');
+			}
 		});
 		
 		return iArPlaylists;

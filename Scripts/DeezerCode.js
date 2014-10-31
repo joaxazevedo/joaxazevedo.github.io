@@ -131,17 +131,20 @@ function createPlaylist(titulo) {
 }
 
 function getAllPlaylists() {
+	var iArPlaylists = [];
     DZ.api(userPlaylist,
 		function (response) {
-			arPlaylists = JSON.parse(response.data);
+			iArPlaylists = JSON.parse(response.data);
 		    //for (var i = 0; i < response.data.length; i++) {
 		    //    arPlaylists.push({ data: response.data[i], tracks: [] });
 		    //}
 		});
+		
+		return iArPlaylists;
 }
 
 function printAllPlaylists() {
-    getAllPlaylists();
+    arPlaylists = getAllPlaylists();
 
     for(var i = 0; i < arPlaylists.length; i++) {
         $('#divContent').append(i + '. ' + arPlaylists[i].data.title + '<br />');

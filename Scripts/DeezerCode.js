@@ -52,7 +52,7 @@ window.dzAsyncInit = function () {
 
 $(document).ready(function () {
     $('#ShowPlaylists').click(function () {
-        printAllPlaylists();
+        printAllPlaylistAndTracks();
     });
 });
 
@@ -133,7 +133,6 @@ function createPlaylist(titulo) {
 function getAllPlaylists() {
     DZ.api(userPlaylist,
 		function (response) {
-			alert('Num playlists: ' + response.data.length);
 		    for (var i = 0; i < response.data.length; i++) {
 		        arPlaylists.push({ data: response.data[i], tracks: [] });
 		    }
@@ -149,6 +148,9 @@ function printAllPlaylists() {
 }
 
 function  printAllPlaylistAndTracks() {
+	getAllPlaylists();
+	getAllMusicsOfArPlaylist();
+	
 	for(var i = 0; i < arPlaylists.length; i++) {
 		$('#divContent').append(arPlaylists[i].data.title + '<br />');
 		for(var j = 0; arPlaylists[i].tracks.length; j++) {

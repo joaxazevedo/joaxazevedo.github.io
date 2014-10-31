@@ -151,7 +151,7 @@ function  printAllPlaylistAndTracks() {
 	getAllPlaylists();
 	getAllMusicsOfArPlaylist();
 	
-	for(var i = 0; i < arPlaylists.length; i++) {
+	for(var i = 0; i < 1; i++) {
 		$('#divContent').append(arPlaylists[i].data.title + '<br />');
 		for(var j = 0; j < arPlaylists[i].tracks.length; j++) {
 			$('#divContent').append('    ' + arPlaylists[i].tracks[j].title + '<br />')

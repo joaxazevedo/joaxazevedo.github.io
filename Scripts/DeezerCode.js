@@ -144,7 +144,7 @@ function printAllPlaylists() {
     getAllPlaylists();
 
     for(var i = 0; i < arPlaylists.length; i++) {
-        $('#divContent').append(arPlaylists[i].data.title + '<br />');
+        $('#divContent').append(i + '. ' + arPlaylists[i].data.title + '<br />');
     }
 }
 

@@ -52,7 +52,7 @@ window.dzAsyncInit = function () {
 
 $(document).ready(function () {
     $('#ShowPlaylists').click(function () {
-        printAllPlaylists();
+        printAllPlaylistAndTracks();
     });
 });
 
@@ -140,7 +140,7 @@ function getAllPlaylists() {
 			}
 		});
 		
-		return iArPlaylists;
+	return iArPlaylists;
 }
 
 function printAllPlaylists() {
@@ -151,8 +151,8 @@ function printAllPlaylists() {
     }
 }
 
-function  printAllPlaylistAndTracks() {
-	getAllPlaylists();
+function printAllPlaylistAndTracks() {
+	arPlaylists = getAllPlaylists();
 	getAllMusicsOfArPlaylist();
 	
 	for(var i = 0; i < 1; i++) {
@@ -172,14 +172,12 @@ function getAllMusicsOfArPlaylist() {
 function getTracks(playlistID, iArPlaylists) {
     DZ.api('/playlist/' + playlistID + '/tracks/',
         function (response) {
-			for(var i = 0; i < response.data.length; i++) {
-				arPlaylists[iArPlaylists].tracks.push(response.data[i]);
-			}
+			arPlaylists[iArPlaylists].tracks = response.data;
         });
 }
 
 function getAllMusicsOfAPlaylist(playlistID) {
-    DZ.api('/playlist/' + playlistID + '/tracks/',
+    DZ.api('/playlist/' + playlistID + '/tracks',
 		function (response) {
 		    for (var i = 0; i < response.data.length; i++) {
 		        $('#divContent').append('    ' + i + '. ' + response.data[i].title + '<br />');

@@ -1,0 +1,17 @@
+<widget id="com.example.hello" version="0.0.1">
+    	<name>Xeroque Rolmes</name>
+    	<description>
+    	    	Xeroque Romes - Detetive
+    	</description>
+    	<author email="carloshximenes@gmail.com" href="http://phonegap.com">
+    	    	Carlos Henrique Ximenes
+    	</author>
+    	<content src="index.html" />
+    	<access origin="*" />
+		<platform name="android">
+              <icon src="imagens/logo.png" density="ldpi" />
+              <icon src="imagens/logo.png" density="mdpi" />
+              <icon src="imagens/logo.png" density="hdpi" />
+              <icon src="imagens/logo.png" density="xhdpi" />
+		</platform>
+</widget>
